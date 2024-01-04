@@ -12,11 +12,11 @@ namespace Commands.Level
         {
             _levelHolder = levelHolder;
         }
-        public void Execute(byte levelIndex)// son kýsým hariç prefab in clonunu oluþturmaya yarýyor
+        public void Execute()
         {
-            /*var levelObject = */
-            Object.Instantiate(original: Resources.Load<GameObject>(path: $"Prefabs/LevelPrefabs/Level {levelIndex}"), _levelHolder, worldPositionStays: true);
-            //levelObject.transform.SetParent(_levelHolder); ya _levelholder,wordpos... yazýcaksýn, ya da yorum satýrýndakileri. oluþturulan objeleri LevelHolderýn altýna çocuk olarak atamaya yarýyor
+            if (_levelHolder.transform.childCount <= 0)
+                return;
+            Object.Destroy(_levelHolder.transform.GetChild(0).gameObject);
         }
     }
 }
