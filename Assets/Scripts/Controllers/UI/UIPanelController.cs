@@ -1,5 +1,5 @@
-﻿using Enums;
-using Signals;
+﻿using Assets.Scripts.Enums;
+using Assets.Scripts.Signals;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,24 +36,28 @@ namespace Assets.Scripts.Controllers.UI
                 if (layer.childCount <= 0) return;
 #if UNITY_EDITOR
                 DestroyImmediate(layer.GetChild(0).gameObject);
-#endif
+#else
                 Destroy(layer.GetChild(0).gameObject);
+#endif
             }
         }
 
-        private void OnOpenPanel(UIPanalTypes panelType, int value)
+        private void OnOpenPanel(UIPanelTypes panelType, int value)
         {
+            OnClosePanel(value);
             Instantiate(Resources.Load<GameObject>($"Screens/{panelType}Panel"), layers[value]);
         }
 
         private void OnClosePanel(int value)
         {
-            if(layers[value].childCount <=0) return;
+            if (layers[value].childCount <= 0) return;
 #if UNITY_EDITOR
-            DestroyImmediate(layers[value].gameObject);
+            DestroyImmediate(layers[value].GetChild(0).gameObject);
+#else
+            Destroy(layers[value].GetChild(0).gameObject);
 #endif
-            Destroy(layers[value].gameObject);
         }
+
         private void UnSubscribeEvents()
         {
             CoreUISignals.Instance.onClosePanel -= OnClosePanel;

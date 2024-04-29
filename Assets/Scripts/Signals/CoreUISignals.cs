@@ -1,8 +1,8 @@
-using Enums;
+using Assets.Scripts.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Signals
+namespace Assets.Scripts.Signals
 {
     public class CoreUISignals : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace Signals
         }
         #endregion
 
-        public UnityAction<UIPanalTypes, int > onOpenPanel = delegate { };
+        public UnityAction<UIPanelTypes, int > onOpenPanel = delegate { };
         public UnityAction<int> onClosePanel = delegate { };
         public UnityAction onCloseAllPanels = delegate { };
 

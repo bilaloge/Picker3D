@@ -1,9 +1,8 @@
+using Assets.Scripts.Enums;
 using Commands.Level;
 using Data.UnityObjects;
 using Data.ValueObjects;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Signals;
 using UnityEngine;
 
 namespace Managers
@@ -94,7 +93,7 @@ namespace Managers
         private void Start()
         {
             CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
-            //uiSignals
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start,1);
         }
     }
 
